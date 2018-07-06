@@ -1,0 +1,38 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: simple-rest
+  name: simple-rest-deployment
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: simple-rest
+    spec:
+      containers:
+        - image: simple-rest:1.0
+          imagePullPolicy: IfNotPresent
+          name: simple-rest
+          ports:
+          - containerPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: simple-rest-service
+  name: simple-rest-service
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    nodePort: 30092
+    targetPort: 8080
+  selector:
+    app: simple-rest
+
+
