@@ -1,0 +1,7 @@
+FROM openjdk:alpine
+
+WORKDIR /app
+add "$PWD/build/libs/simple-db-rest-0.0.1-SNAPSHOT.jar" /app/simple-db-rest.jar
+
+ENTRYPOINT ["java","-jar","simple-db-rest.jar"]
+
